@@ -1,32 +1,32 @@
-'use strict';
+"use strict";
 
-const { Category, Item } = require('../models/models');
+const { Category, Item } = require("../models/models");
 
-exports.getItemById = async (ctx) => {
+exports.getItemById = async (req, res) => {
   try {
-    const itemId = ctx.params.id;
-    ctx.body = await Item.findById(itemId);
-    ctx.status = 200;
+    const itemId = req.params.id;
+    res.send(await Item.findById(itemId));
+    res.status(200);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.status = 500;
   }
 };
 
-exports.createItem = async (ctx) => {
+exports.createItem = async (req, res) => {
   try {
     // { "catId", "content" : { ITEM OBJECT } }
-    const catId = ctx.request.body.catId;
-    const title = ctx.request.body.title;
+    const catId = req.body.catId;
+    const title = req.body.title;
     const cat = await Category.findById(catId);
     const newItem = await Item.create({ parent: catId, title });
     const newItemList = [...cat.items, newItem._id];
     await Category.findByIdAndUpdate(catId, { $set: { items: newItemList } });
-    ctx.body = newItem;
-    ctx.status = 201;
+    res.send(newItem);
+    res.status(201);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 400;
+    res.send(error.message);
+    res.status(400);
   }
 };
 
@@ -39,7 +39,9 @@ exports.deleteItem = async (ctx) => {
     const deletedItem = await Item.findByIdAndDelete(itemId);
 
     await Category.findByIdAndUpdate(catId, {
-      $set: { items: category.items.filter((item) => item.toString() !== itemId) },
+      $set: {
+        items: category.items.filter((item) => item.toString() !== itemId),
+      },
     });
 
     ctx.body = deletedItem;
@@ -55,7 +57,11 @@ exports.updateItem = async (ctx) => {
     // { ITEM OBJECT }
     const itemChanges = ctx.request.body;
     const itemId = itemChanges._id;
-    const updatedItem = await Item.findByIdAndUpdate(itemId, { $set: itemChanges }, { new: true });
+    const updatedItem = await Item.findByIdAndUpdate(
+      itemId,
+      { $set: itemChanges },
+      { new: true }
+    );
     ctx.body = updatedItem;
     ctx.status = 202;
   } catch (error) {
