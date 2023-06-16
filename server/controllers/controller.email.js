@@ -26,7 +26,7 @@ exports.sendEmail = async (req, res) => {
 
     mailAll(userData);
 
-    res.status = 200;
+    res.status(200);
   } catch (error) {
     res.send(error.message);
     res.status(200);

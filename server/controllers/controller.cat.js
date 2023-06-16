@@ -62,7 +62,7 @@ exports.updateCat = async (req, res) => {
       { new: true }
     );
     res.send(updatedCategory);
-    res.send(202);
+    res.status(202);
   } catch (error) {
     res.send(error.message);
     res.status(500);
