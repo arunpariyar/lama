@@ -30,11 +30,11 @@ exports.createItem = async (req, res) => {
   }
 };
 
-exports.deleteItem = async (ctx) => {
+exports.deleteItem = async (req, res) => {
   try {
     // { "catId", "itemId" }
-    const catId = ctx.request.body.catId;
-    const itemId = ctx.request.body.itemId;
+    const catId = req.body.catId;
+    const itemId = req.body.itemId;
     const category = await Category.findById(catId);
     const deletedItem = await Item.findByIdAndDelete(itemId);
 
@@ -44,28 +44,28 @@ exports.deleteItem = async (ctx) => {
       },
     });
 
-    ctx.body = deletedItem;
-    ctx.status = 202;
+    res.send(deletedItem);
+    res.status(202);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.send(500);
   }
 };
 
-exports.updateItem = async (ctx) => {
+exports.updateItem = async (req, res) => {
   try {
     // { ITEM OBJECT }
-    const itemChanges = ctx.request.body;
+    const itemChanges = req.body;
     const itemId = itemChanges._id;
     const updatedItem = await Item.findByIdAndUpdate(
       itemId,
       { $set: itemChanges },
       { new: true }
     );
-    ctx.body = updatedItem;
-    ctx.status = 202;
+    res.send(updatedItem);
+    res.status(202);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.send(500);
   }
 };

@@ -1,68 +1,70 @@
-'use strict';
+"use strict";
 
-const { User, Category } = require('../models/models');
+const { User, Category } = require("../models/models");
 
-exports.getCatById = async (ctx) => {
+exports.getCatById = async (req, res) => {
   try {
-    const catId = ctx.params.id;
-    ctx.body = await Category.findById(catId);
-    ctx.status = 200;
+    const catId = req.params.id;
+    res.send(await Category.findById(catId));
+    res.status(200);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.status(500);
   }
 };
 
-exports.createCat = async (ctx) => {
+exports.createCat = async (req, res) => {
   try {
     // { "userId", "name" }
-    const userId = ctx.request.body.userId;
-    const name = ctx.request.body.name;
+    const userId = req.body.userId;
+    const name = req.body.name;
     const user = await User.findById(userId);
     const newCat = await Category.create({ owner: userId, name });
     const newCatList = [...user.categories, newCat._id];
     await User.findByIdAndUpdate(userId, { $set: { categories: newCatList } });
-    ctx.body = newCat;
-    ctx.status = 201;
+    res.send(newCat);
+    res.status(201);
   } catch (error) {
-    ctx.body = { error, message: 'Could not create category' };
-    ctx.status = 400;
+    res.send({ error, message: "Could not create category" });
+    res.status(400);
   }
 };
 
-exports.deleteCat = async (ctx) => {
+exports.deleteCat = async (req, res) => {
   try {
     // { "userId", "catId" }
-    const userId = ctx.request.body.userId;
-    const catId = ctx.request.body.catId;
+    const userId = req.body.userId;
+    const catId = req.body.catId;
     const user = await User.findById(userId);
     const deletedCategory = await Category.findByIdAndDelete(catId);
 
     await User.findByIdAndUpdate(userId, {
-      $set: { categories: user.categories.filter((cat) => cat.toString() !== catId) },
+      $set: {
+        categories: user.categories.filter((cat) => cat.toString() !== catId),
+      },
     });
-    ctx.body = deletedCategory;
-    ctx.status = 202;
+    res.send(deletedCategory);
+    res.status(202);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.status(500);
   }
 };
 
-exports.updateCat = async (ctx) => {
+exports.updateCat = async (req, res) => {
   try {
     // { CATEGORY }
-    const catChanges = ctx.request.body;
+    const catChanges = req.body;
     const catId = catChanges._id;
     const updatedCategory = await Category.findByIdAndUpdate(
       catId,
       { $set: catChanges },
       { new: true }
     );
-    ctx.body = updatedCategory;
-    ctx.status = 202;
+    res.send(updatedCategory);
+    res.send(202);
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.status(500);
   }
 };

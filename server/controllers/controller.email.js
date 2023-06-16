@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-const { mailAll } = require('../services/service.email');
-const { User, Category, Item } = require('../models/models');
+const { mailAll } = require("../services/service.email");
+const { User, Category, Item } = require("../models/models");
 
-exports.sendEmail = async (ctx) => {
+exports.sendEmail = async (req, res) => {
   try {
-    const userId = ctx.params.userid;
+    const userId = req.params.userid;
     const userData = await User.findById(userId);
 
     // Populate categories
@@ -26,9 +26,9 @@ exports.sendEmail = async (ctx) => {
 
     mailAll(userData);
 
-    ctx.status = 200;
+    res.status = 200;
   } catch (error) {
-    ctx.body = error.message;
-    ctx.status = 500;
+    res.send(error.message);
+    res.status(200);
   }
 };
