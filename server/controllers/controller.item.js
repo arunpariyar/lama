@@ -5,7 +5,8 @@ const { Category, Item } = require("../models/models");
 exports.getItemById = async (req, res) => {
   try {
     const itemId = req.params.id;
-    res.send(await Item.findById(itemId));
+    const item = await Item.findById(itemId);
+    res.send(item);
     res.status(200);
   } catch (error) {
     res.send(error.message);

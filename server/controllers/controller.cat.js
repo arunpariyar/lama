@@ -5,7 +5,8 @@ const { User, Category } = require("../models/models");
 exports.getCatById = async (req, res) => {
   try {
     const catId = req.params.id;
-    res.send(await Category.findById(catId));
+    const cat = await Category.findById(catId);
+    res.send(cat);
     res.status(200);
   } catch (error) {
     res.send(error.message);
