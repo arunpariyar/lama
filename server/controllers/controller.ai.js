@@ -1,28 +1,28 @@
-'use strict';
+"use strict";
 
-const { openai } = require('../services/service.ai');
+const { openai } = require("../services/service.ai");
 
-exports.sendMessage = async (ctx) => {
+exports.sendMessage = async (req, res) => {
   try {
-    const { chats } = ctx.request.body;
+    const { chats } = req.body;
     const result = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: "gpt-3.5-turbo",
       messages: [
         {
-          role: 'system',
+          role: "system",
           content:
-            'You can help with life admin management tasks and should send very short messages',
+            "You can help with life admin management tasks and should send very short messages",
         },
         ...chats,
       ],
     });
 
-    ctx.body = {
+    res.send({
       output: result.data.choices[0].message,
-    };
-    ctx.status = 202;
+    });
+    res.status(202);
   } catch (error) {
-    ctx.body = { output: { role: 'Error', content: 'AI response went wrong' } };
-    ctx.status = 500;
+    res.body({ output: { role: "Error", content: "AI response went wrong" } });
+    res.status(500);
   }
 };
