@@ -1,7 +1,4 @@
 "use strict";
-//change to make use of express
-// const Router = require("koa-router");
-// const router = new Router();
 const express = require("express");
 const router = express.Router();
 
