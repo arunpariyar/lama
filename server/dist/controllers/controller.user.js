@@ -8,17 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -45,11 +34,8 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const { name, email, password } = req.body;
         const hash = yield bcrypt_1.default.hash(password, 10);
         const user = yield models_1.User.create({ name, email, password: hash });
-        const { password: string } = user, newUser = __rest(user, ["password"]);
-        console.log(newUser);
         // delete userObject.password;
         res.status(201);
-        res.send(newUser);
     }
     catch (error) {
         console.log(error);

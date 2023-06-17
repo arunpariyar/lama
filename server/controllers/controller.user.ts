@@ -22,7 +22,8 @@ export const registerUser = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hash });
-    // delete userObject.password;
+    const userObject = user.toObject();
+    delete userObject.password;
     res.status(201);
   } catch (error) {
     console.log(error);
@@ -40,7 +41,7 @@ export const logIn = async (req: Request, res: Response) => {
       const validatedPass = await bcrypt.compare(password, user.password!);
       if (!validatedPass) throw new Error();
       const userObject = user.toObject();
-      // delete userObject.password;
+      delete userObject.password;
       res.send(userObject);
       res.status(202);
     }
