@@ -34,7 +34,8 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const { name, email, password } = req.body;
         const hash = yield bcrypt_1.default.hash(password, 10);
         const user = yield models_1.User.create({ name, email, password: hash });
-        // delete userObject.password;
+        const userObject = user.toObject();
+        delete userObject.password;
         res.status(201);
     }
     catch (error) {
@@ -54,7 +55,7 @@ const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             if (!validatedPass)
                 throw new Error();
             const userObject = user.toObject();
-            // delete userObject.password;
+            delete userObject.password;
             res.send(userObject);
             res.status(202);
         }

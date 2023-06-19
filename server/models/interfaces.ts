@@ -5,7 +5,7 @@ export interface User {
   notif_due: boolean;
   notif_opt: boolean;
   notif_freq: number;
-  categories: Category[];
+  categories: Category[] | null;
 }
 
 export interface Category {
@@ -15,6 +15,7 @@ export interface Category {
   owner: User;
 }
 export interface Item {
+  title: string;
   start_date: Date;
   checked: boolean;
   freq_weeks: number;
