@@ -23,10 +23,11 @@ exports.createItem = async (req, res) => {
     const newItem = await Item.create({ parent: catId, title });
     const newItemList = [...cat.items, newItem._id];
     await Category.findByIdAndUpdate(catId, { $set: { items: newItemList } });
-    res.send(newItem);
     res.status(201);
+    res.send(newItem);
+    
   } catch (error) {
-    res.send(error.message);
+    res.send(error);
     res.status(400);
   }
 };
