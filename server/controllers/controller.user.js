@@ -13,6 +13,7 @@ exports.getUserById = async (req, res) => {
     res.status(200);
   } catch (error) {
     res.status(500);
+    error.message = "user doesnot exist in the database"
     res.send(error);
   }
 };
