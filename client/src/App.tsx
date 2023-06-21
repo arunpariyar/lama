@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-import Home from './components/Home';
-import Dashboard from './components/Dashboard';
-import About from './components/About';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import Chat from './components/Chat';
+import Home from './components/Home/Home';
+import Dashboard from './components/Dashboard/Dashboard';
+import About from './components/About/About';
+import LogIn from './components/LogIn/LogIn';
+import SignUp from './components/SignUp/SignUp';
+import Chat from './components/Chat/Chat';
 import './App.css';
 
 function App() {

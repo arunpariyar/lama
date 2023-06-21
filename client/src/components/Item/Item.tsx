@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { loadItem, updItem } from '../services/ApiItem';
+import { loadItem, updItem } from '../../services/ApiItem';
 import { Checkbox } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import ButtonItemEdit from './popups/ButtonItemEdit';
+import ButtonItemEdit from '../popups/ButtonItemEdit';
 import dayjs from 'dayjs';
 import './Item.css';
 

@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { logUser } from '../services/ApiUser';
+import { logUser } from '../../services/ApiUser';
 import { useNavigate } from 'react-router';
 import './LogIn.css';
 

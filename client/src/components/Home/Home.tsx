@@ -1,6 +1,6 @@
-import image01 from '../assets/Screenshot01xs.jpg';
-import image02 from '../assets/Screenshot02xs.jpg';
-import logo from '../assets/icon-512x512.png';
+import image01 from '../../assets/Screenshot01xs.jpg';
+import image02 from '../../assets/Screenshot02xs.jpg';
+import logo from '../../assets/icon-512x512.png';
 import { Link } from 'react-router-dom';
 import './Home.css';
 

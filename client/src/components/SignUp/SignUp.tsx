@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { createUser } from '../services/ApiUser';
+import { createUser } from '../../services/ApiUser';
 import { ChangeEvent, useState } from 'react';
 import './SignUp.css';
 
 // Types
-import { LogInProps } from './Login.types';
+import { LogInProps } from '../LogIn/Login.types';
 
 function SignUp({ setIsLoggedIn, setCurrentUser }: LogInProps) {
   const [userData, setUserData] = useState({ name: '', email: '', password: '' });

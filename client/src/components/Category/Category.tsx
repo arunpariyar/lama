@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { loadCat, updateCat } from '../services/ApiCategory';
-import { newItem, delItem } from '../services/ApiItem';
-import ButtonCatEdit from './popups/ButtonCatEdit';
-import ButtonCatColor from './popups/ButtonCatColor';
+import { loadCat, updateCat } from '../../services/ApiCategory';
+import { newItem, delItem } from '../../services/ApiItem';
+import ButtonCatEdit from '../popups/ButtonCatEdit';
+import ButtonCatColor from '../popups/ButtonCatColor';
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
-import Item from './Item';
+import Item from '../Item/Item';
 import './Category.css';
 
 interface ICategory {
@@ -68,8 +68,8 @@ function Category({ catId, deleteCategory }: ICategory) {
       .catch((error) => console.log(error));
   }
 
-  function updateCategory(_id: string, name: string, _color?: string) {
-    const content = { _id, name, _color };
+  function updateCategory(_id: string, name: string, color?: string) {
+    const content = { _id, name, color };
     updateCat(content)
       .then((response) => setCategory(response))
       .catch((error) => console.log(error));

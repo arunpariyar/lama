@@ -1,17 +1,13 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { loadUser } from '../services/ApiUser';
-import { loadCat, newCat, delCat } from '../services/ApiCategory';
-import { delItem } from '../services/ApiItem';
+import { loadUser } from '../../services/ApiUser';
+import { loadCat, newCat, delCat } from '../../services/ApiCategory';
+import { delItem } from '../../services/ApiItem';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
-import ButtonNotifications from './popups/ButtonNotifications';
-import Category from './Category';
-import logo from '../assets/icon-512x512.png';
+import ButtonNotifications from '../popups/ButtonNotifications';
+import Category from '../Category/Category';
+import logo from '../../assets/icon-512x512.png';
 import './Dashboard.css';
-import {User} from './popups/ButtonNotifications';
-
-//type UserIdDb = {
-//  userIdDb: string
-//}
+import {User} from '../popups/ButtonNotifications';
 
 function Dashboard({userIdDb}: {userIdDb: string}) {
   const [user, setUser] = useState<User>({ _id: '', name: '', notif_freq: '', email: '', notif_opt: false, notif_due: false });

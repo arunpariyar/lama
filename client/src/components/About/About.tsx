@@ -1,4 +1,4 @@
-import lama_hi_img from '../assets/img-lama-hi.jpg';
+import lama_hi_img from '../../assets/img-lama-hi.jpg';
 import './About.css';
 
 function About() {

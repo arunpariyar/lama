@@ -1,7 +1,7 @@
 import './Chat.css';
-import logo from '../assets/icon-512x512.png';
+import logo from '../../assets/icon-512x512.png';
 import { FormEvent, useState } from 'react';
-import { AIchat } from '../services/ApiAI';
+import { AIchat } from '../../services/ApiAI';
 
 type Chat = {
   role: string;

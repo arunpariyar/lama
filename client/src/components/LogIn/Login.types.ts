@@ -1,4 +1,4 @@
-import {User} from './popups/ButtonNotifications';
+import {User} from '../popups/ButtonNotifications';
 
 export interface LogInProps {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
