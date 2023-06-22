@@ -5,6 +5,7 @@ import './NavBar.css';
 import { NavBarProps} from './NavBar.types';
 
 function NavBar({ isLoggedIn, setIsLoggedIn }: NavBarProps) {
+  console.log(isLoggedIn, 'is logged in');
   return (
     <div className="NavBar">
       <div id="nav-links">
