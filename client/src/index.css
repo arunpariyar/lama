@@ -2,15 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: ‘Roboto’, sans-serif;
 }
-
 body {
   background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgb(245, 233, 221) 100%);
 }
-
 /* Dark mode to be implemented and set by default
-
 @media (prefers-color-scheme: dark) {
   body {
     color: white;
@@ -21,17 +18,13 @@ body {
     background-color: rgb(65, 65, 65);
   }
 } */
-
 /* Modified Scrollbar */
-
 *::-webkit-scrollbar {
   width: 5px;
 }
-
 *::-webkit-scrollbar-track {
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
 }
-
 *::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
